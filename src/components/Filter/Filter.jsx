@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BsSearch } from 'react-icons/bs';
 import {
     FilterWrapper,
@@ -7,15 +7,7 @@ import {
 } from './Filter.styled';
 import PropTypes from 'prop-types';
 
-export default class Filter extends Component {
-static propTypes = {
-    value: PropTypes.string.isRequired,
-    handleFilter: PropTypes.func.isRequired,
-};
-
-render() {
-    const { value, handleFilter } = this.props;
-
+const Filter = ({ value, handleFilter }) => {    
     return (
     <FilterWrapper>
         <Label>
@@ -31,4 +23,10 @@ render() {
     </FilterWrapper>
     );
 }
-}
+
+Filter.propTypes = {
+    value: PropTypes.string.isRequired,
+    handleFilter: PropTypes.func.isRequired,
+};
+
+export default Filter;

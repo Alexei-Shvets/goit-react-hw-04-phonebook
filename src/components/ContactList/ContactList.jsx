@@ -1,38 +1,26 @@
-import React, { Component, Fragment } from 'react';
 import ContactItem from '../ContactItem/ContactItem';
 import { UlList } from './ContactList.styled';
 import PropTypes from 'prop-types';
 
-export default class ContactList extends Component {
-static propTypes = {
-    contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        number: PropTypes.string.isRequired,
-    })
-    ).isRequired,
-    handleDelete: PropTypes.func.isRequired,
+const ContactList = ({ contacts, handleDelete }) => {
+    const elements = contacts.map(({ id, name, number }) => (
+        <ContactItem
+            key={id}
+            id={id}
+            name={name}
+            number={number}
+            handleDelete={handleDelete}
+        />
+    ));
+    return <UlList>{elements}</UlList>;
 };
 
-render() {
-    return (
-    <Fragment>
-        {this.props.contacts.length > 0 && (
-        <UlList>
-            {this.props.contacts.map(({ id, name, number }) => (
-            <ContactItem
-                key={id}
-                name={name}
-                number={number}
-                handleDelete={() => {
-                this.props.handleDelete(id);
-                }}
-            />
-            ))}
-        </UlList>
-        )}
-    </Fragment>
-    );
-}
-}
+ContactList.propTypes = {
+    contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    }).isRequired
+).isRequired,
+};
+
+export default ContactList;
